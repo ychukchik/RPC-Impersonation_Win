@@ -1,0 +1,40 @@
+[
+	uuid(7faf447d-6d2e-4a06-bd2e-a5d2d5a416a4),
+	version(1.0)
+]
+
+interface InterfaceRPC
+{
+	void GetLoginPass(
+		[in] handle_t hBinding,
+		[in, string] const char* login,
+		[in, string] const char* Password,
+		[in, out] int* ret_code);
+	
+	void LogOut(
+		[in] handle_t hBinding);
+
+	void PreDownloadFile(
+		[in] handle_t hBinding,
+		[in, string] const char* Filename,
+		[in, out] int* szFile);
+
+	void DownloadFile(
+		[in] handle_t hBinding,
+		[in, string] const char* Filename,
+		[in] int* len,
+		[in, out, size_is(*len)] byte* downBuf,
+		[in, out] int* ret_code);
+
+	void UploadFile(
+		[in] handle_t hBinding,
+		[in, string] const char* Filename,
+		[in] int* len,
+		[in, out, size_is(*len + 1)] byte* upBuf,
+		[in, out] int* ret_code);
+
+	void RemoveFile(
+		[in] handle_t hBinding,
+		[in, string] const char* Filename,
+		[in, out] int* ret_code);
+}
